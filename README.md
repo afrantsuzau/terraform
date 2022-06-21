@@ -1,2 +1,1 @@
-# terraform
-Terraform IaC Playground
+# Terraform IaC Playground
