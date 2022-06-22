@@ -88,3 +88,7 @@
         key_name = "admin"
     }
     ```
+
+## [Terraform state storage and locking](https://www.terraform.io/language/state/backends)
+  * State file contains sensitive information so it should be stored remotely at a protected place (AWS S3 Bucket, HashiCorp Storage, Google Cloud Storage and Terraform Cloud) and never pushed into repository
+  * Terraform has a state locking mechanism to prevent applying changes simulteniously which can potentially lead to conflicts or data losts
