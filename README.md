@@ -1,4 +1,4 @@
-# Terraform Associate Certification Preparation Playgtound
+# Terraform Associate Certification Preparation Playground
 
 ## [Terraform variables definition precedence](https://www.terraform.io/language/values/variables#variable-definition-precedence)
 
@@ -40,3 +40,16 @@
 * map
 * tuple
 * object
+
+## [Terraform outputs](https://www.terraform.io/language/values/outputs)
+* To list all outputs use command `terraform output`
+    ```
+    instance_private_ip = "172.31.34.224"
+    instance_public_ip = <sensitive>
+    ```
+
+* To view specific output value use `terraform output instance_private_ip`
+    ```
+    instance_private_ip = "172.31.34.224"
+    ```
+    
