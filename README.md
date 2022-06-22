@@ -1,6 +1,6 @@
-# Terraform IaC Playground
+# Terraform Associate Certification Preparation Playgtound
 
-## Terraform variables definition precedence
+## [Terraform variables definition precedence](https://www.terraform.io/language/values/variables#variable-definition-precedence)
 
 1. Through env variables: 
     ```
@@ -16,7 +16,7 @@
     terraform plan -var-file playground.tfvars
     ```
 
-## Terraform variables validation examples
+## [Terraform variables validation](https://www.terraform.io/language/values/variables#custom-validation-rules)
 1. 
     ```
     validation {
@@ -31,3 +31,12 @@
       error_message = "The 'instance_type' value must be a valid EC2 instance type in ['t2.micro', 't3.micro']"
     }
     ```
+
+## [Terraform variables types](https://www.terraform.io/language/expressions/types)
+* string
+* number
+* bool
+* list
+* map
+* tuple
+* object
