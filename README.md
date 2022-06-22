@@ -1,4 +1,4 @@
-# Terraform Associate Certification Preparation Playground
+# [Terraform Associate Certification Preparation Playground](https://github.com/afratsuzau/terraform)
 
 ## [Terraform variables definition precedence](https://www.terraform.io/language/values/variables#variable-definition-precedence)
 
@@ -48,8 +48,34 @@
     instance_public_ip = <sensitive>
     ```
 
-* To view specific output value use `terraform output instance_private_ip`
+* To view specific output value use command `terraform output instance_private_ip`
     ```
     instance_private_ip = "172.31.34.224"
     ```
-    
+
+## [Terraform resource attributes](https://www.terraform.io/language/resources)
+* To display resource attributes use command `terraform show`
+
+## [Terraform resource dependencies](https://www.terraform.io/language/meta-arguments/depends_on)
+* Code sample
+    ```
+    depends_on = [
+      aws_instance.db
+    ]
+    ```
+
+## [Terraform resource targeting](https://learn.hashicorp.com/tutorials/terraform/resource-targeting)
+* To apply change only for specific resource run command `terraform apply -target=random_string.random_suffix`
+    ```
+    Terraform will perform the following actions:
+
+    # random_string.random_suffix must be replaced
+    -/+ resource "random_string" "random_suffix" {
+          ~ id          = "tv6j4p" -> (known after apply)
+          ~ length      = 6 -> 8 # forces replacement
+          ~ result      = "tv6j4p" -> (known after apply)
+            # (9 unchanged attributes hidden)
+        }
+
+    Plan: 1 to add, 0 to change, 1 to destroy.
+    ```

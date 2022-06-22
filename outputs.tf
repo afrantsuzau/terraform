@@ -1,11 +1,23 @@
-output "instance_public_ip" {
-  description = "EC2 Instance piblic IP address"
-  value       = aws_instance.amazon_linux.public_ip
+output "web_public_ip" {
+  description = "Web Instance piblic IP address"
+  value       = aws_instance.web.public_ip
   sensitive   = true
 }
 
-output "instance_private_ip" {
-  description = "EC2 Instance private IP address"
-  value       = aws_instance.amazon_linux.private_ip
+output "web_private_ip" {
+  description = "Web Instance private IP address"
+  value       = aws_instance.web.private_ip
+  sensitive   = false
+}
+
+output "db_public_ip" {
+  description = "Database Instance piblic IP address"
+  value       = aws_instance.db.public_ip
+  sensitive   = true
+}
+
+output "db_private_ip" {
+  description = "Database Instance private IP address"
+  value       = aws_instance.db.private_ip
   sensitive   = false
 }
