@@ -17,14 +17,14 @@
     ```
 
 ## [Terraform variables validation](https://www.terraform.io/language/values/variables#custom-validation-rules)
-  * Example #1
+  * Code snippet #1
     ```
     validation {
         condition = can(regex("^ami-", var.ami))
         error_message = "The 'ami' value must be a valid AMI id, starting with 'ami-'."
     }
     ```
-  * Example #2
+  * Code snippet #2
     ```
     validation {
         condition = contains(["t2.micro", "t3.micro"], var.instance_type)
@@ -57,7 +57,7 @@
   * To display resource attributes use command `terraform show`
 
 ## [Terraform resource dependencies](https://www.terraform.io/language/meta-arguments/depends_on)
-  * Code sample
+  * Code snippet
     ```
     depends_on = [
         aws_instance.db
@@ -92,3 +92,5 @@
 ## [Terraform state storage and locking](https://www.terraform.io/language/state/backends)
   * State file contains sensitive information so it should be stored remotely at a protected place (AWS S3 Bucket, HashiCorp Storage, Google Cloud Storage and Terraform Cloud) and never pushed into repository
   * Terraform has a state locking mechanism to prevent applying changes simulteniously which can potentially lead to conflicts or data losts
+
+## [Terraform count](https://www.terraform.io/language/meta-arguments/count) and [Terraform for_each](https://www.terraform.io/language/meta-arguments/for_each)

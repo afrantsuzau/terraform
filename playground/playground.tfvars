@@ -2,4 +2,5 @@
 env                 = "playground"
 instance_ami        = "ami-0a1ee2fb28fe05df3"
 instance_monitoring = false
-instance_count      = 2
+webserver_count     = 2
+database_servers    = ["playground-db-01", "playground-db-02"]

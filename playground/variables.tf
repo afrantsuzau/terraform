@@ -38,8 +38,14 @@ variable "instance_monitoring" {
   default     = false
 }
 
-variable "instance_count" {
-  description = "AWS EC2 Instance Count"
+variable "webserver_count" {
+  description = "A number of web servers"
   type        = number
   default     = 1
+}
+
+variable "database_servers" {
+  description = "A set of database servers"
+  type        = set(any)
+  default     = ["playground-db-01", "playground-db-02"]
 }
