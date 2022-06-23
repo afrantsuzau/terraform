@@ -162,3 +162,87 @@
                 sudo systemctl start nginx
                 EOF
     ```
+
+## [Terraform functions](https://www.terraform.io/language/functions)
+  * Most common `numeric` functions
+  ```
+  $ terraform console
+  > min(1, 5, -5, 100, -12)
+  -12
+
+  > max(1, 5, -5, 100, -12)
+  100
+
+  > max(var.num...)
+  100
+
+  > ceil(10.1)
+  11
+
+  > ceil(10.9)
+  11
+
+  > floor(10.1)
+  10
+
+  > floor(10.9)
+  10
+  ```
+  * Most common `string` functions
+  ```
+  $ terraform console
+  > split(",", "ami-1,ami-2,ami-3")
+  tolist([
+    "ami-1",
+    "ami-2",
+    "ami-3",
+  ]
+
+  > lower("ami-1,ami-2,AMI-3")
+  "ami-1,ami-2,ami-3"
+
+  > upper("ami-1,ami-2,AMI-3")
+  "AMI-1,AMI-2,AMI-3"
+
+  > title("ami-1,ami-2,AMI-3")
+  "Ami-1,Ami-2,AMI-3"
+
+  > substr("ami-1,ami-2,AMI-3", 6, 5)
+  "ami-2"
+
+  > join(",", ["ami-1","ami-2","AMI-3"])
+  "ami-1,ami-2,AMI-3"
+  ```
+  * Most common `collection` functions
+  ```
+  $ terraform console
+  > length("ami-1,ami-2,AMI-3")
+  17
+
+  > index(["ami-1","ami-2","ami-3"], "ami-2")
+  1
+
+  > element(["ami-1","ami-2","ami-3"], 2)
+  "ami-3"
+
+  > contains(["ami-1","ami-2","ami-3"], "ami-0")
+  false
+
+  > keys({"eu-cental-1" = "ami-1", "eu-west-1" = "ami-2"})
+  [
+    "eu-cental-1",
+    "eu-west-1",
+  ]
+
+  > values({"eu-cental-1" = "ami-1", "eu-west-1" = "ami-2"})
+  [
+    "ami-1",
+    "ami-2",
+  ]
+
+  > lookup({"eu-cental-1" = "ami-1", "eu-west-1" = "ami-2"}, "eu-west-1")
+  "ami-2"
+
+  > lookup({"eu-cental-1" = "ami-1", "eu-west-1" = "ami-2"}, "non-existing-1", "ami-default")
+  "ami-default"
+  ```

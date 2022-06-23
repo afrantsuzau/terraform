@@ -12,7 +12,7 @@ variable "env" {
 variable "instance_ami" {
   description = "AWS EC2 AMI ID"
   type        = string
-  sensitive   = true
+  sensitive   = false
   validation {
     condition     = can(regex("^ami-", var.instance_ami))
     error_message = "The \"instance_ami\" value must be a valid AMI id, starting with 'ami-'."
