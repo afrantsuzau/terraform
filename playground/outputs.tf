@@ -1,12 +1,12 @@
 output "web_public_ip" {
   description = "Web Instance piblic IP address"
-  value       = "${aws_instance.web.*.public_ip}"
+  value       = aws_instance.web.*.public_ip
   sensitive   = true
 }
 
 output "web_private_ip" {
   description = "Web Instance private IP address"
-  value       = "${aws_instance.web.*.private_ip}"
+  value       = aws_instance.web.*.private_ip
   sensitive   = false
 }
 

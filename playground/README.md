@@ -81,7 +81,7 @@
     ```
 
 ## [Terraform data sources](https://www.terraform.io/language/data-sources)
-  * Keyword: data
+  * Keyword: `data`
   * It only reads infrastructure
     ```
     data "aws_key_pair" "admin" {
@@ -94,3 +94,71 @@
   * Terraform has a state locking mechanism to prevent applying changes simulteniously which can potentially lead to conflicts or data losts
 
 ## [Terraform count](https://www.terraform.io/language/meta-arguments/count) and [Terraform for_each](https://www.terraform.io/language/meta-arguments/for_each)
+  * `count` code snippet
+    ```
+    resource "aws_instance" "web" {
+      count         = var.webserver_count
+      ami           = var.instance_ami
+      instance_type = var.instance_type[var.env]
+      monitoring    = var.instance_monitoring
+
+      key_name = data.aws_key_pair.admin.key_name
+
+      tags = {
+        Name        = "playground-web-${count.index}-${random_string.random_suffix.result}"
+        Environment = var.env
+        Owner       = "Terraform"
+      }
+
+      depends_on = [
+        aws_instance.db
+      ]
+
+      provider = aws.frankfurt
+    }
+    ```
+  * `for_each` code snippet
+    ```
+    resource "aws_instance" "db" {
+      for_each      = var.database_servers
+      ami           = var.instance_ami
+      instance_type = var.instance_type[var.env]
+      monitoring    = var.instance_monitoring
+
+      key_name = data.aws_key_pair.admin.key_name
+
+      tags = {
+        Name        = each.value
+        Environment = var.env
+        Owner       = "Terraform"
+      }
+
+      provider = aws.frankfurt
+    }
+    ```
+
+## [Terraform provisioners](https://www.terraform.io/language/resources/provisioners/syntax)
+  * `local-exec` provisioner code snippet
+    ```
+    provisioner "local-exec" {
+      on_failure = fail
+      command = "echo 'Created a ${each.key} EC2 Instance!' >> terraform_provisioner.log"
+    }
+
+    provisioner "local-exec" {
+      when    = destroy
+      on_failure = continue
+      command = "echo 'Destroyed ${each.key} EC2 Instance!' >> terraform_provisioner.log"
+    }
+    ```
+  * `remote-exec` provisioner requires corresponding security group(with opened SSH port) attached to aws instance and SSH key on it.
+  * Caution: As a best practice Terraform recommends to use provisioners as a last resort and prefer to use cloud providers build-in mechanism. For instance `user_data` for AWS.
+    ```
+    user_data = <<-EOF
+                #!/bin/bash
+                sudo apt update
+                sudo apt -qqy install nginx
+                sudo systemctl enable nginx
+                sudo systemctl start nginx
+                EOF
+    ```

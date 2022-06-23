@@ -21,6 +21,17 @@ resource "aws_instance" "db" {
     Owner       = "Terraform"
   }
 
+  provisioner "local-exec" {
+    on_failure = fail
+    command = "echo 'Created a ${each.key} EC2 Instance!' >> terraform_provisioner.log"
+  }
+
+  provisioner "local-exec" {
+    when    = destroy
+    on_failure = continue
+    command = "echo 'Destroyed ${each.key} EC2 Instance!' >> terraform_provisioner.log"
+  }
+
   provider = aws.frankfurt
 }
 resource "aws_instance" "web" {
@@ -36,6 +47,14 @@ resource "aws_instance" "web" {
     Environment = var.env
     Owner       = "Terraform"
   }
+
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo apt update
+              sudo apt -qqy install nginx
+              sudo systemctl enable nginx
+              sudo systemctl start nginx
+              EOF
 
   depends_on = [
     aws_instance.db
