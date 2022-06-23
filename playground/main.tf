@@ -23,13 +23,13 @@ resource "aws_instance" "db" {
 
   provisioner "local-exec" {
     on_failure = fail
-    command = "echo 'Created a ${each.key} EC2 Instance!' >> terraform_provisioner.log"
+    command    = "echo 'Created a ${each.key} EC2 Instance!' >> terraform_provisioner.log"
   }
 
   provisioner "local-exec" {
-    when    = destroy
+    when       = destroy
     on_failure = continue
-    command = "echo 'Destroyed ${each.key} EC2 Instance!' >> terraform_provisioner.log"
+    command    = "echo 'Destroyed ${each.key} EC2 Instance!' >> terraform_provisioner.log"
   }
 
   provider = aws.frankfurt

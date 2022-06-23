@@ -246,3 +246,25 @@
   > lookup({"eu-cental-1" = "ami-1", "eu-west-1" = "ami-2"}, "non-existing-1", "ami-default")
   "ami-default"
   ```
+
+## [Terraform operators and conditional expressions](https://www.terraform.io/language/expressions/operators)
+  * Operators code snippets
+  ```
+  $ terraform console
+  > 8 != "8"
+  true
+
+  5 >= 5
+  true
+
+  > 5 >= 5 && 8 == "8"
+  false
+
+  > 5 >= 5 || 8 == "8"
+  true
+  ```
+  * Conditions code snippets
+  ```
+  # condition ? true_value : false_value
+  length = var.length < 8 ? 8 : var.length
+  ```
