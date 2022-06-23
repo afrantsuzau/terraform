@@ -1,3 +1,10 @@
+locals {
+  common_tags = {
+    Environment = var.env
+    Owner       = "Terraform"
+  }
+}
+
 data "aws_key_pair" "admin" {
   key_name = "admin"
 }
@@ -15,11 +22,12 @@ resource "aws_instance" "db" {
 
   key_name = data.aws_key_pair.admin.key_name
 
-  tags = {
-    Name        = each.value
-    Environment = var.env
-    Owner       = "Terraform"
-  }
+  tags = merge(
+    local.common_tags,
+    {
+      Name = each.value
+    }
+  )
 
   provisioner "local-exec" {
     on_failure = fail
@@ -42,11 +50,12 @@ resource "aws_instance" "web" {
 
   key_name = data.aws_key_pair.admin.key_name
 
-  tags = {
-    Name        = "playground-web-${count.index}-${random_string.random_suffix.result}"
-    Environment = var.env
-    Owner       = "Terraform"
-  }
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "playground-web-${count.index}-${random_string.random_suffix.result}"
+    }
+  )
 
   user_data = <<-EOF
               #!/bin/bash

@@ -268,3 +268,25 @@
   # condition ? true_value : false_value
   length = var.length < 8 ? 8 : var.length
   ```
+
+## [Terraform local values](https://www.terraform.io/language/values/locals)
+  * code snippet
+  ```
+  locals {
+    common_tags = {
+      Environment = var.env
+      Owner       = "Terraform"
+    }
+  }
+
+  resource "aws_instance" "example" {
+    ...
+    tags = merge(
+      local.common_tags,
+      {
+        Name = "locals example"
+      }
+    )
+    ...
+  }
+  ```
