@@ -9,6 +9,14 @@ variable "env" {
   }
 }
 
+variable "vpc_id" {
+  sensitive = true
+}
+variable "ingress_ports" {
+  type    = list(any)
+  default = ["22", "80", "443"]
+}
+
 variable "instance_ami" {
   description = "AWS EC2 AMI ID"
   type        = string
