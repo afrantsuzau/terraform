@@ -55,14 +55,14 @@ resource "aws_eks_node_group" "nodes" {
   # Key-value map of resource tags
   tags = {
     "k8s.io/cluster-autoscaler/node-template/label/name"                   = "${var.nodes_name}"
-    "k8s.io/cluster-autoscaler/node-template/taint/${var.node_taint[key]}" = "${var.node_taint[value]}:${var.node_taint[effect]}"
+    "k8s.io/cluster-autoscaler/node-template/taint/${var.node_taint.key}"  = "${var.node_taint.value}:${var.node_taint.effect}"
     Name                                                                   = "${var.cluster_name}-${var.nodes_name}"
     Environment                                                            = var.environment
   }
 
   tags_all = {
     "k8s.io/cluster-autoscaler/node-template/label/name"                   = "${var.nodes_name}"
-    "k8s.io/cluster-autoscaler/node-template/taint/${var.node_taint[key]}" = "${var.node_taint[value]}:${var.node_taint[effect]}"
+    "k8s.io/cluster-autoscaler/node-template/taint/${var.node_taint.key}"  = "${var.node_taint.value}:${var.node_taint.effect}"
     Name                                                                   = "${var.cluster_name}-${var.nodes_name}"
     Environment                                                            = var.environment
   }
