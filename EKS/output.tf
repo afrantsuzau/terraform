@@ -18,3 +18,7 @@ output "eks_cluster_region" {
 output "eks_cluster_vpc_cidr" {
   value = var.vpc_cidr[terraform.workspace]
 }
+
+output "efs_id" {
+  value = module.efs.efs_id
+}

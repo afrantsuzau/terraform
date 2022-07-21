@@ -4,7 +4,5 @@ resource "null_resource" "eks_kubeconfig" {
     on_failure = continue
   }
 
-  depends_on = [
-    module.eks_cluster
-  ]
+  depends_on = [module.eks_cluster]
 }

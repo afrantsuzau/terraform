@@ -24,7 +24,7 @@ module "eks_nodes" {
 
   iam_eks_nodes_role_arn = module.eks_iam.iam_eks_nodes_role_arn
 
-  depends_on = [module.eks_cluster]
+  depends_on = [module.eks_cluster, module.eks_keypair]
 }
 
 module "eks_workers" {
@@ -53,5 +53,5 @@ module "eks_workers" {
 
   iam_eks_nodes_role_arn = module.eks_iam.iam_eks_nodes_role_arn
 
-  depends_on = [module.eks_cluster]
+  depends_on = [module.eks_cluster, module.eks_keypair]
 }

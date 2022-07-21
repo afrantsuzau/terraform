@@ -8,7 +8,5 @@ resource "local_file" "eks_keypair" {
     on_failure = continue
   }
 
-  depends_on = [
-    module.eks_keypair
-  ]
+  depends_on = [module.eks_keypair]
 }

@@ -10,9 +10,5 @@ module "eks_bastion" {
       cidr_blocks = ["83.0.37.150/32"]
     }
   ]
-  depends_on = [
-    module.eks_vpc,
-    module.eks_keypair,
-    local_file.eks_keypair
-  ]
+  depends_on = [module.eks_vpc, module.eks_keypair, local_file.eks_keypair]
 }
