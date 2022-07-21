@@ -7,4 +7,8 @@ resource "local_file" "eks_keypair" {
     command    = "ssh-add ./ssh-keys/${terraform.workspace}.pem"
     on_failure = continue
   }
+
+  depends_on = [
+    module.eks_keypair
+  ]
 }

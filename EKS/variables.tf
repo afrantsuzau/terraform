@@ -1,3 +1,7 @@
+variable "kubernetes_version" {
+  default = "1.22"
+}
+
 variable "region" {
   default = {
     default    = "eu-central-1"
